@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "store/actions/todo";
 import styled from "styled-components";
 
 const CreateTodo: React.FC = () => {
   const [value, setValue] = useState("");
+  const dispatch = useDispatch();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (!value.trim()) return;
+    dispatch(addTodo(value));
     setValue("");
   };
 

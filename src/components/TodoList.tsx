@@ -1,10 +1,14 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import TodoItem from "components/TodoItem";
+import { RootState } from "store/reducers";
+import { Todos } from "types/todo";
 
 const TodoList: React.FC = () => {
-  const todoList = [
-    { id: "1", content: "test", isCheck: false, createdAt: "" },
-  ];
+  const { todoList } = useSelector<RootState, Todos>((state) => state.todo);
+  // const todoList = [
+  //   { id: "1", content: "test", isCheck: false, createdAt: "" },
+  // ];
 
   return (
     <Container>

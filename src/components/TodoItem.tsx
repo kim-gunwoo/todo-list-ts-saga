@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Todo } from "types/todo";
 import { ReactComponent as Edit } from "assets/icons/edit.svg";
@@ -6,6 +7,7 @@ import { ReactComponent as Trash } from "assets/icons/trash.svg";
 import { ReactComponent as Check } from "assets/icons/check.svg";
 import { ReactComponent as Save } from "assets/icons/save.svg";
 import { ReactComponent as Cancel } from "assets/icons/cancel.svg";
+import { checkTodo, deleteTodo, updateTodo } from "store/actions/todo";
 
 interface TodoItemProps {
   todo: Todo;
@@ -14,21 +16,37 @@ interface TodoItemProps {
 export default function TodoItem({ todo }: TodoItemProps) {
   const [isModify, setIsModify] = useState(false);
   const [value, setValue] = useState("");
+  const dispatch = useDispatch();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(e.target.value);
   };
 
-  const handleCheck = (): void => {};
+  const handleCheck = (): void => {
+    dispatch(
+      checkTodo({
+        id: todo.id,
+        isCheck: !todo.isCheck,
+      })
+    );
+  };
 
   const handleModify = (): void => {
     setValue(todo.content);
     setIsModify(true);
   };
 
-  const handleDelete = (): void => {};
+  const handleDelete = (): void => {
+    dispatch(deleteTodo(todo.id));
+  };
 
   const handleSubmit = (): void => {
+    dispatch(
+      updateTodo({
+        id: todo.id,
+        content: value,
+      })
+    );
     setIsModify(false);
   };
 
