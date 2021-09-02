@@ -2,7 +2,7 @@
 
 ## 배포주소
 
-👉
+👉 https://dazzling-mcnulty-cc8e93.netlify.app
 
 ## 👨‍💻 실행 방법
 

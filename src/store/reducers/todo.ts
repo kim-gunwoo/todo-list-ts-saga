@@ -1,8 +1,9 @@
 import {
-  ADD_TODO,
-  DELETE_TODO,
-  CHECK_TODO,
-  UPDATE_TODO,
+  ADD_TODO_SUCCESS,
+  UPDATE_TODO_SUCCESS,
+  CHECK_TODO_SUCCESS,
+  DELETE_TODO_SUCCESS,
+  GET_TODOS_SUCCESS,
 } from "store/actions/types";
 import { TodosAction } from "store/actions/todo";
 import { Todos } from "types/todo";
@@ -14,10 +15,11 @@ const INITIAL_STATE: Todos = {
 
 export default function todo(state = INITIAL_STATE, action: TodosAction) {
   switch (action.type) {
-    case ADD_TODO:
+    case GET_TODOS_SUCCESS:
+      return { ...state, ...action.payload };
+    case ADD_TODO_SUCCESS:
       const newId =
         Math.max(0, ...state.todoList.map((todo) => Number(todo.id))) + 1;
-
       return {
         ...state,
         count: state.count + 1,
@@ -31,13 +33,13 @@ export default function todo(state = INITIAL_STATE, action: TodosAction) {
           },
         ],
       };
-    case DELETE_TODO:
+    case DELETE_TODO_SUCCESS:
       return {
         ...state,
         count: state.count - 1,
         todoList: state.todoList.filter((todo) => todo.id !== action.payload),
       };
-    case CHECK_TODO:
+    case CHECK_TODO_SUCCESS:
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
@@ -46,7 +48,7 @@ export default function todo(state = INITIAL_STATE, action: TodosAction) {
             : todo
         ),
       };
-    case UPDATE_TODO:
+    case UPDATE_TODO_SUCCESS:
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
