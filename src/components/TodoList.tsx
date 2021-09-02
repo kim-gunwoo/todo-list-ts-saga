@@ -1,14 +1,18 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import TodoItem from "components/TodoItem";
 import { RootState } from "store/reducers";
 import { Todos } from "types/todo";
+import { getTodosRequest } from "store/actions/todo";
 
 const TodoList: React.FC = () => {
   const { todoList } = useSelector<RootState, Todos>((state) => state.todo);
-  // const todoList = [
-  //   { id: "1", content: "test", isCheck: false, createdAt: "" },
-  // ];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTodosRequest());
+  }, [dispatch]);
 
   return (
     <Container>

@@ -7,7 +7,11 @@ import { ReactComponent as Trash } from "assets/icons/trash.svg";
 import { ReactComponent as Check } from "assets/icons/check.svg";
 import { ReactComponent as Save } from "assets/icons/save.svg";
 import { ReactComponent as Cancel } from "assets/icons/cancel.svg";
-import { checkTodo, deleteTodo, updateTodo } from "store/actions/todo";
+import {
+  checkTodoRequest,
+  deleteTodoRequest,
+  updateTodoRequest,
+} from "store/actions/todo";
 
 interface TodoItemProps {
   todo: Todo;
@@ -24,7 +28,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
 
   const handleCheck = (): void => {
     dispatch(
-      checkTodo({
+      checkTodoRequest({
         id: todo.id,
         isCheck: !todo.isCheck,
       })
@@ -37,12 +41,12 @@ export default function TodoItem({ todo }: TodoItemProps) {
   };
 
   const handleDelete = (): void => {
-    dispatch(deleteTodo(todo.id));
+    dispatch(deleteTodoRequest(todo.id));
   };
 
   const handleSubmit = (): void => {
     dispatch(
-      updateTodo({
+      updateTodoRequest({
         id: todo.id,
         content: value,
       })

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "store/actions/todo";
+import { addTodoRequest } from "store/actions/todo";
 import styled from "styled-components";
 
 const CreateTodo: React.FC = () => {
@@ -10,7 +10,7 @@ const CreateTodo: React.FC = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (!value.trim()) return;
-    dispatch(addTodo(value));
+    dispatch(addTodoRequest(value));
     setValue("");
   };
 
